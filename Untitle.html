@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+        background: linear-gradient(45deg, #ff0000, #00ffea, #0000ff);
+      background-size: 600% 600%;
+      animation: gradient 10s ease infinite;
+    }
+        /* Animação para o gradiente */
+        @keyframes gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    /* Estilos para o menu */
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+    
+    a {
+      text-decoration: none;
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    
+    /* Estilos para os conteúdos */
+    .content {
+      display: none; /* Esconder todos os conteúdos */
+    }
+        /* Estilos para o chat */
+        #chatbox {
+      width: 600px;
+      height: 300px;
+      border: 1px solid #f8f8f8;
+      overflow-y: scroll;
+      margin-bottom: 10px;
+      background-color: #000000;
+      border-radius: 5px;
+    }
+    
+    #chatbox p {
+      margin: 5px 0;
+      color: red;
+    }
+    #chatbox p strong {
+        color: azure;
+        font: italic;
+    }
+    .chat {
+        color: #f8f8f8;
+
+    }
+    .mus {
+        color: #f8f8f8;
+    }
+    .calc {
+        color: #f8f8f8;
+    }
+    p {
+        color: #f8f8f8;
+    }
+    .calculator {
+      width: 200px;
+      height: 200px;
+      border: 2px solid #fd0000;
+      padding: 10px;
+      background-color: #756c6c;
+      border-radius: 7px;
+    }
+    
+    .calculator input[type="button"] {
+      width: 24px;
+      height: 24px;
+      margin: 6px;
+    }
+  </style>
+  <script>
+    // Função para exibir o conteúdo correspondente ao clicar no menu
+    function pags(conteudoId) {
+      // Esconder todos os conteúdos
+      var conteudos = document.getElementsByClassName('content');
+      for (var i = 0; i < conteudos.length; i++) {
+        conteudos[i].style.display = 'none';
+      }
+      
+      // Exibir o conteúdo correspondente ao conteudoId
+      var conteudo = document.getElementById(conteudoId);
+      conteudo.style.display = 'block';
+    }
+      // Função para enviar uma mensagem
+      function enviarMensagem() {
+      var mensagem = document.getElementById('mensagem').value;
+      if (mensagem !== '') {
+        var chatbox = document.getElementById('chatbox');
+        chatbox.innerHTML += '<p><strong>you:</strong> ' + mensagem + '</p>';
+        document.getElementById('mensagem').value = '';
+        chatbox.scrollTop = chatbox.scrollHeight; // Rolar automaticamente para o final
+      }
+    }
+      // Função para realizar o cálculo
+      function calcular() {
+      var input = document.getElementById('display');
+      var resultado = eval(input.value);
+      input.value = resultado;
+    }
+    
+    // Função para adicionar números e operadores ao display
+    function adicionarCaractere(caractere) {
+      var input = document.getElementById('display');
+      input.value += caractere;
+    }
+    
+    // Função para limpar o display
+    function limpar() {
+      var input = document.getElementById('display');
+      input.value = '';
+    }
+  </script>
+
+  
+</head>
+<body>
+  <ul>
+    <li><a href="#" onclick="pags('coisa1')">chat</a></li>
+    <li><a href="#" onclick="pags('coisa2')">músicas</a></li>
+    <li><a href="#" onclick="pags('coisa3')">calculadora</a></li>
+  </ul>
+  
+  <div id="coisa1" class="content">
+    <!-- Conteúdo da Página 1 -->
+    <h1 class="chat">CHAT</h1>
+    <div id="chatbox"></div>
+  <input type="text" id="mensagem" placeholder="Digite sua mensagem">
+  <button onclick="enviarMensagem()">Enviar</button>
+  
+  </div>
+  
+  <div id="coisa2" class="content">
+    <!-- Conteúdo da Página 2 -->
+    <h1 class="mus">Página 2</h1>
+    <p>Conteúdo da página 2 aqui...</p>
+  </div>
+
+  <div id="coisa3" class="content">
+    <!-- Conteúdo da Página 2 -->
+    <h1 class="calc">Página 2</h1>
+    <p>Conteúdo da página 2 aqui...</p>
+    <div class="calculator">
+        <input type="text" id="display" readonly>
+        <br>
+        <input type="button" value="C" onclick="limpar()">
+        <br>
+        <input type="button" value="1" onclick="adicionarCaractere('1')">
+        <input type="button" value="2" onclick="adicionarCaractere('2')">
+        <input type="button" value="3" onclick="adicionarCaractere('3')">
+        <input type="button" value="+" onclick="adicionarCaractere('+')">
+        <br>
+        <input type="button" value="4" onclick="adicionarCaractere('4')">
+        <input type="button" value="5" onclick="adicionarCaractere('5')">
+        <input type="button" value="6" onclick="adicionarCaractere('6')">
+        <input type="button" value="-" onclick="adicionarCaractere('-')">
+        <br>
+        <input type="button" value="7" onclick="adicionarCaractere('7')">
+        <input type="button" value="8" onclick="adicionarCaractere('8')">
+        <input type="button" value="9" onclick="adicionarCaractere('9')">
+        <input type="button" value="*" onclick="adicionarCaractere('*')">
+        <br>
+        <input type="button" value="0" onclick="adicionarCaractere('0')">
+        <input type="button" value="." onclick="adicionarCaractere('.')">
+        <input type="button" value="=" onclick="calcular()">
+        <input type="button" value="/" onclick="adicionarCaractere('/')">
+      </div>
+  </div>
+  <script>
+    // Exibir o conteúdo da página inicial
+    pags('coisa1');
+  </script>
+</body>
+
+</html>
